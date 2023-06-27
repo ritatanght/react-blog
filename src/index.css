@@ -1,13 +1,43 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: TTEditFont;
+  src: url("./assets/fonts/TTEditp.ttf");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: iansui;
+  src: url("./assets/fonts/Iansui-regular.ttf");
+}
+
+@font-face {
+  font-family: mikiyu-penji-p;
+  src: url("./assets/fonts/mikiyu-penji-p.ttf");
+}
+
+/* :root {
+} */
+
+@layer components {
+  .sidebar-heading {
+    @apply bg-primary-500 absolute text-center text-xl -top-3.5 translate-x-1/2 right-1/2 uppercase font-bold;
+  }
+  .sidebar-section {
+    @apply border-2 rounded my-8 relative w-full px-2 py-4;
+  }
+  code {
+    @apply pl-5 py-5 my-5;
+  }
+}
+
+.logo,
+.sidebar-heading {
+  font-family: TTEditFont;
+}
+
+body {
+  font-family: iansui, sans-serif;
+  font-size: 1.2rem;
 }

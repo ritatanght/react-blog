@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import SinglePost from "./components/SinglePost";
+import PostList from "./components/AllPosts";
+import QueryList from "./components/QueryList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex flex-col">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route element={<PostList />} path="/" />
+          <Route path="blog" element={<QueryList />} />
+          <Route path="blog/:slug" element={<SinglePost />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
