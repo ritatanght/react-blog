@@ -22,7 +22,7 @@ const PageNavigation = ({ handlePageChange, page, count }: PageNaviProps) => {
       <button
         aria-label="Next page"
         className={`flex items-center hover:text-primary-500 ${
-          page === count - 1 ? "invisible" : ""
+          !count || page === count - 1 ? "invisible" : ""
         }`}
         onClick={() => handlePageChange("next")}
       >

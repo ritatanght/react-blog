@@ -32,7 +32,9 @@ export const RichTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => <ul className="ml-10 list-disc">{children}</ul>,
-    number: ({ children }) => <ol className="ml-10 list-decimal">{children}</ol>,
+    number: ({ children }) => (
+      <ol className="ml-10 list-decimal">{children}</ol>
+    ),
   },
 
   block: {
@@ -51,6 +53,7 @@ export const RichTextComponents: PortableTextComponents = {
     blockquote: ({ children }: any) => (
       <blockquote className="bg-slate-600 py-5">{children}</blockquote>
     ),
+    normal: ({ children }: any) => <p className="p-3">{children}</p>,
   },
 
   marks: {

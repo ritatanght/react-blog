@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { SearchBar } from "../SearchBar";
-import { PiBooks } from "react-icons/pi";
+import { useState } from "react";
+import { SearchBar } from "./SearchBar";
+import { PiBooks, PiTelegramLogo, PiInstagramLogoBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import client from "../../sanity/client";
-import { useQuery } from "@tanstack/react-query";
+import { useBlogContext } from "../../context/blogContext";
 
 const Aside = () => {
   const [isOpen, setOpen] = useState(false);
-  const [categories, setCategories] = useState<{ title: string }[]>([
-    { title: "Food" },
-    { title: "Coding" },
-    { title: "Recipe" },
-  ]);
-  const { isLoading } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () => getCategories().then((result) => setCategories(result)),
-    keepPreviousData: true,
-  });
+  const { categories } = useBlogContext();
+
+  // const { isLoading } = useQuery({
+  //   queryKey: ["categories"],
+  //   queryFn: () => getCategories().then((result) => setCategories(result)),
+  //   keepPreviousData: true,
+  // });
 
   return (
     <div
@@ -37,7 +33,7 @@ const Aside = () => {
       <SearchBar />
       <aside className="sidebar-section">
         <h3 className="sidebar-heading w-8/12">Categories</h3>
-        {isLoading ? (
+        {categories.length === 0 ? (
           "..."
         ) : (
           <ul className="flex flex-wrap gap-2">
@@ -52,15 +48,18 @@ const Aside = () => {
           </ul>
         )}
       </aside>
+      <aside className="text-center flex items-center gap-1 justify-center">
+        <h3 className="inline-block hand-font font-bold uppercase">Find Me</h3>
+        <Link
+          to="https://t.me/rtkitsune"
+          target="_blank"
+          className="inline-block text-2xl p-1 std-transition rounded-full hover:bg-primary-200 hover:text-primary-700"
+        >
+          <PiTelegramLogo />
+        </Link>
+      </aside>
     </div>
   );
 };
 
 export default Aside;
-
-async function getCategories() {
-  const data = await client.fetch(`*[_type == 'category']{
- title
- }`);
-  return data;
-}

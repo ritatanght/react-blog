@@ -18,3 +18,14 @@ interface BlogMainImage {
   alt: string;
   [key: string]: any;
 }
+
+export interface BlogContextType {
+  categories: string[];
+  blogList: BlogData[];
+  page: number;
+  date: string;
+  count: number;
+  searchParams: URLSearchParams;
+  isLoading: boolean;
+  handlePageChange: (arg0: string) => void;
+}

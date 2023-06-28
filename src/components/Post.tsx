@@ -7,18 +7,8 @@ const Post = ({ post }: any) => {
   return (
     <article className="p-4 bg-secondary-dark text-white mb-4 rounded">
       <Link to={`/blog/${encodeURIComponent(post.slug.current)}`}>
-        <h2 className="text-4xl ">{post.title}</h2>
+        <h2 className="text-3xl md:text-4xl mb-4">{post.title}</h2>
       </Link>
-      <span className="block text-right text-sm text-primary-300 mb-2">
-        {new Date(publishedAt).toLocaleDateString("zh-hk", {
-          weekday: "long",
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-        })}
-      </span>
       {mainImage && (
         <img
           src={urlForImage(mainImage).url()}
@@ -29,7 +19,7 @@ const Post = ({ post }: any) => {
       <p className="inline-block">{body.split("").slice(0, 80).join("")}...</p>{" "}
       <Link
         to={`/blog/${encodeURIComponent(post.slug.current)}`}
-        className="block text-center transition ease-in-out duration-500 font-bold p-2 my-2 rounded bg-primary-100 text-primary-600 md:float-right hover:bg-primary-500 hover:text-primary-100"
+        className="block text-center std-transition font-bold p-2 my-2 rounded bg-primary-100 text-primary-600 md:float-right hover:bg-primary-500 hover:text-primary-100"
       >
         Read More
       </Link>
@@ -50,6 +40,16 @@ const Post = ({ post }: any) => {
           </ul>
         )}
       </div>
+      <span className="block text-right text-sm text-primary-300">
+        {new Date(publishedAt).toLocaleDateString("zh-hk", {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        })}
+      </span>
     </article>
   );
 };

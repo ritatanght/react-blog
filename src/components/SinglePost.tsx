@@ -1,29 +1,38 @@
-import client from "../sanity/client";
 import { PortableText } from "@portabletext/react";
 import { urlForImage } from "../sanity/image";
 import { RichTextComponents } from "./RichTextComponents";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BlogData } from "../types/types";
+import { getSingleBlog } from "../service/blogService";
+//import { useQuery } from "@tanstack/react-query";
+import Loader from "./Loader";
 
-//export const SinglePost = async ({ params }: { params: { slug: string } }) => {
 const SinglePost = () => {
   const [blog, setBlog] = useState<BlogData | null>(null);
   const { slug } = useParams();
+
+  // const { isLoading } = useQuery({
+  //   queryKey: ["blog", slug],
+  //   queryFn: () => {
+  //     if (slug) {
+  //       getSingleBlog(slug).then((result) => setBlog(result));
+  //     }
+  //   },
+  // });
   useEffect(() => {
     if (slug) {
-      getBlog(slug).then((result) => setBlog(result));
+      getSingleBlog(slug).then((result) => setBlog(result));
     }
   }, [slug]);
-  console.log(blog);
 
-  if (!blog) return <>Loading</>;
+  if (!blog) return <Loader />;
 
   const { title, mainImage, body } = blog;
 
   return (
     <>
-      <article className="w-11/12 bg-primary-600 rounded text-white p-4 mx-auto">
+      <article className="w-full md:w-11/12 bg-primary-600 rounded text-white p-4 mx-auto">
         <h1 className="text-4xl mb-2">{title}</h1>
         {mainImage && (
           <img src={urlForImage(mainImage).url()} alt={mainImage.alt} />
@@ -32,17 +41,10 @@ const SinglePost = () => {
       </article>
       <section>
         <h2>Related</h2>
+        <div className="fire"></div>
       </section>
     </>
   );
 };
 
 export default SinglePost;
-
-async function getBlog(slug: string) {
-  const res = await client.fetch(`*[_type=="post" && slug.current=="${slug}"]`);
-  if (!res) {
-    throw new Error("Failed to blog details");
-  }
-  return res[0];
-}

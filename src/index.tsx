@@ -13,12 +13,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BlogContextProvider>
+    <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <BlogContextProvider>
           <App />
-        </BrowserRouter>
+        </BlogContextProvider>
       </QueryClientProvider>
-    </BlogContextProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

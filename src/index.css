@@ -17,8 +17,11 @@
   src: url("./assets/fonts/mikiyu-penji-p.ttf");
 }
 
-/* :root {
-} */
+:root {
+  --db: #4a84f0;
+  --lb: #97c2ff;
+  --T: transparent;
+}
 
 @layer components {
   .sidebar-heading {
@@ -30,14 +33,145 @@
   code {
     @apply pl-5 py-5 my-5;
   }
+  .std-transition {
+    @apply transition ease-in-out duration-300;
+  }
 }
 
 .logo,
-.sidebar-heading {
+.sidebar-heading,
+.hand-font {
   font-family: TTEditFont;
 }
 
 body {
   font-family: iansui, sans-serif;
   font-size: 1.2rem;
+}
+.fire-loader {
+  /* background: <image> <position> / <size>; */
+  font-size: 10px;
+  width: 24em;
+  height: 24em;
+  background: linear-gradient(
+        -68deg,
+        var(--lb, var(--lb, lightblue) 49%) 50%,
+        var(--T, transparent) 50%
+      )
+      44% 38% / 2.5em 7em,
+    linear-gradient(
+        66deg,
+        /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+        var(--T, transparent) 40%
+      )
+      55% 38% / 2.5em 7em,
+    radial-gradient(
+      6em 6em at 50% 60%,
+      var(--lb, lightblue) 48%,
+      var(--T, transparent) 40%
+    ),
+    linear-gradient(-68deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
+      3em 8em,
+    linear-gradient(68deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
+      30% / 3em 9em,
+    radial-gradient(
+      7em 7.5em at 50% 60%,
+      var(--db, blue) 49%,
+      var(--T, transparent) 50%
+    );
+  background-repeat: no-repeat;
+
+  animation: burn 1.5s ease-in-out infinite;
+}
+
+@keyframes burn {
+  from,
+  to {
+    background: linear-gradient(
+          -68deg,
+          var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--T, transparent) 50%
+        )
+        44% 38% / 2.5em 7em,
+      linear-gradient(
+          66deg,
+          /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--T, transparent) 40%
+        )
+        55% 38% / 2.5em 7em,
+      radial-gradient(
+        6em 6em at 50% 60%,
+        var(--lb, lightblue) 48%,
+        var(--T, transparent) 40%
+      ),
+      linear-gradient(-68deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
+        3em 8em,
+      linear-gradient(68deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
+        30% / 3em 9em,
+      radial-gradient(
+        7em 7.5em at 50% 60%,
+        var(--db, blue) 49%,
+        var(--T, transparent) 50%
+      );
+    background-repeat: no-repeat;
+    
+  }
+  40% {
+    background: linear-gradient(
+          -70deg,
+          var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--T, transparent) 50%
+        )
+        44% 38% / 2.5em 7em,
+      linear-gradient(
+          60deg,
+          /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--T, transparent) 40%
+        )
+        55% 38% / 2.5em 7em,
+      radial-gradient(
+        6em 6em at 50% 59%,
+        var(--lb, lightblue) 50%,
+        var(--T, transparent) 40%
+      ),
+      linear-gradient(-68deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
+        3em 8em,
+      linear-gradient(68deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
+        30% / 3em 9em,
+      radial-gradient(
+        7em 7.5em at 50% 59%,
+        var(--db, blue) 49%,
+        var(--T, transparent) 50%
+      );
+    background-repeat: no-repeat;
+  }
+  80% {
+    background: linear-gradient(
+          -65deg,
+          var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--T, transparent) 50%
+        )
+        44% 38% / 2.5em 7em,
+      linear-gradient(
+          70deg,
+          /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--T, transparent) 40%
+        )
+        55% 38% / 2.5em 7em,
+      radial-gradient(
+        6em 6em at 50% 60%,
+        var(--lb, lightblue) 48%,
+        var(--T, transparent) 40%
+      ),
+      linear-gradient(-67deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
+        3em 9em,
+      linear-gradient(70deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
+        30% / 3em 9em,
+      radial-gradient(
+        7em 7.5em at 50% 60%,
+        var(--db, blue) 49%,
+        var(--T, transparent) 50%
+      );
+    background-repeat: no-repeat;
+  }
 }
