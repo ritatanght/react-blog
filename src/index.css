@@ -2,36 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: TTEditFont;
-  src: url("./assets/fonts/TTEditp.ttf");
-}
-
-@font-face {
-  font-family: iansui;
-  src: url("./assets/fonts/Iansui-regular.ttf");
-}
-
-@font-face {
-  font-family: mikiyu-penji-p;
-  src: url("./assets/fonts/mikiyu-penji-p.ttf");
-}
-
 :root {
-  --db: #4a84f0;
-  --lb: #97c2ff;
+  --db: #8cb0f2;
+  --lb: #bed7fa;
   --T: transparent;
+  font-family: "Roboto", sans-serif;
 }
 
 @layer components {
   .sidebar-heading {
-    @apply bg-primary-500 absolute text-center text-xl -top-3.5 translate-x-1/2 right-1/2 uppercase font-bold;
+    @apply bg-primary-700 absolute text-center text-xl -top-3.5 translate-x-1/2 right-1/2 uppercase font-bold w-8/12;
   }
   .sidebar-section {
     @apply border-2 rounded my-8 relative w-full px-2 py-4;
-  }
-  code {
-    @apply pl-5 py-5 my-5;
   }
   .std-transition {
     @apply transition ease-in-out duration-300;
@@ -41,13 +24,9 @@
 .logo,
 .sidebar-heading,
 .hand-font {
-  font-family: TTEditFont;
+  font-family: "Indie Flower", cursive;
 }
 
-body {
-  font-family: iansui, sans-serif;
-  font-size: 1.2rem;
-}
 .fire-loader {
   /* background: <image> <position> / <size>; */
   font-size: 10px;
@@ -55,33 +34,32 @@ body {
   height: 24em;
   background: linear-gradient(
         -68deg,
-        var(--lb, var(--lb, lightblue) 49%) 50%,
+        var(--lb, var(--lb, #97c2ff) 49%) 50%,
         var(--T, transparent) 50%
       )
       44% 38% / 2.5em 7em,
     linear-gradient(
         66deg,
-        /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+        var(--lb, var(--lb, #97c2ff) 49%) 50%,
         var(--T, transparent) 40%
       )
       55% 38% / 2.5em 7em,
     radial-gradient(
       6em 6em at 50% 60%,
-      var(--lb, lightblue) 48%,
+      var(--lb, #97c2ff) 48%,
       var(--T, transparent) 40%
     ),
-    linear-gradient(-68deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
-      3em 8em,
-    linear-gradient(68deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
-      30% / 3em 9em,
+    linear-gradient(-68deg, var(--db, #4a84f0) 50%, var(--T, #4a84f0) 50%) 43%
+      30% / 3em 8em,
+    linear-gradient(68deg, var(--db, #4a84f0) 50%, var(--T, transparent) 50%)
+      57% 30% / 3em 9em,
     radial-gradient(
       7em 7.5em at 50% 60%,
-      var(--db, blue) 49%,
+      var(--db, #4a84f0) 49%,
       var(--T, transparent) 50%
     );
   background-repeat: no-repeat;
-
-  animation: burn 1.5s ease-in-out infinite;
+  animation: burn 1s ease-in-out infinite;
 }
 
 @keyframes burn {
@@ -89,58 +67,57 @@ body {
   to {
     background: linear-gradient(
           -68deg,
-          var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--lb, var(--lb, #97c2ff) 49%) 50%,
           var(--T, transparent) 50%
         )
         44% 38% / 2.5em 7em,
       linear-gradient(
           66deg,
-          /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--lb, var(--lb, #97c2ff) 49%) 50%,
           var(--T, transparent) 40%
         )
         55% 38% / 2.5em 7em,
       radial-gradient(
         6em 6em at 50% 60%,
-        var(--lb, lightblue) 48%,
+        var(--lb, #97c2ff) 48%,
         var(--T, transparent) 40%
       ),
-      linear-gradient(-68deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
-        3em 8em,
-      linear-gradient(68deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
-        30% / 3em 9em,
+      linear-gradient(-68deg, var(--db, #4a84f0) 50%, var(--T, #4a84f0) 50%) 43%
+        30% / 3em 8em,
+      linear-gradient(68deg, var(--db, #4a84f0) 50%, var(--T, transparent) 50%)
+        57% 30% / 3em 9em,
       radial-gradient(
         7em 7.5em at 50% 60%,
-        var(--db, blue) 49%,
+        var(--db, #4a84f0) 49%,
         var(--T, transparent) 50%
       );
     background-repeat: no-repeat;
-    
   }
   40% {
     background: linear-gradient(
           -70deg,
-          var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--lb, var(--lb, #97c2ff) 49%) 50%,
           var(--T, transparent) 50%
         )
         44% 38% / 2.5em 7em,
       linear-gradient(
           60deg,
-          /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--lb, var(--lb, #97c2ff) 49%) 50%,
           var(--T, transparent) 40%
         )
         55% 38% / 2.5em 7em,
       radial-gradient(
         6em 6em at 50% 59%,
-        var(--lb, lightblue) 50%,
+        var(--lb, #97c2ff) 50%,
         var(--T, transparent) 40%
       ),
-      linear-gradient(-68deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
-        3em 8em,
-      linear-gradient(68deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
-        30% / 3em 9em,
+      linear-gradient(-68deg, var(--db, #4a84f0) 50%, var(--T, #4a84f0) 50%) 43%
+        30% / 3em 8em,
+      linear-gradient(68deg, var(--db, #4a84f0) 50%, var(--T, transparent) 50%)
+        57% 30% / 3em 9em,
       radial-gradient(
         7em 7.5em at 50% 59%,
-        var(--db, blue) 49%,
+        var(--db, #4a84f0) 49%,
         var(--T, transparent) 50%
       );
     background-repeat: no-repeat;
@@ -148,28 +125,28 @@ body {
   80% {
     background: linear-gradient(
           -65deg,
-          var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--lb, var(--lb, #97c2ff) 49%) 50%,
           var(--T, transparent) 50%
         )
         44% 38% / 2.5em 7em,
       linear-gradient(
           70deg,
-          /* change this value */ var(--lb, var(--lb, lightblue) 49%) 50%,
+          var(--lb, var(--lb, #97c2ff) 49%) 50%,
           var(--T, transparent) 40%
         )
         55% 38% / 2.5em 7em,
       radial-gradient(
         6em 6em at 50% 60%,
-        var(--lb, lightblue) 48%,
+        var(--lb, #97c2ff) 48%,
         var(--T, transparent) 40%
       ),
-      linear-gradient(-67deg, var(--db, blue) 50%, var(--T, blue) 50%) 43% 30% /
-        3em 9em,
-      linear-gradient(70deg, var(--db, blue) 50%, var(--T, transparent) 50%) 57%
+      linear-gradient(-67deg, var(--db, #4a84f0) 50%, var(--T, #4a84f0) 50%) 43%
         30% / 3em 9em,
+      linear-gradient(70deg, var(--db, #4a84f0) 50%, var(--T, transparent) 50%)
+        57% 30% / 3em 9em,
       radial-gradient(
         7em 7.5em at 50% 60%,
-        var(--db, blue) 49%,
+        var(--db, #4a84f0) 49%,
         var(--T, transparent) 50%
       );
     background-repeat: no-repeat;

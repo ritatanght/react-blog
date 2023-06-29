@@ -1,18 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 
 export const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setMessage("");
     if (search) {
       navigate(`/blog?search=${encodeURIComponent(search)}`);
+    } else {
+      setMessage("Please enter search words");
+      setTimeout(() => setMessage(""), 5000);
     }
   };
   return (
-    <aside>
+    <aside className="relative">
+      {message && (
+        <div className="absolute -top-8 left-0 right-0 text-sm bg-primary-200 p-1 mb-1 rounded text-center text-primary-700">
+          {message}
+        </div>
+      )}
       <form
         className="flex justify-center items-center"
         onSubmit={handleSubmit}

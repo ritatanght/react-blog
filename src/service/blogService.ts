@@ -1,5 +1,5 @@
 import client from "../sanity/client";
-const paginated = 2;
+import { paginate } from "../context/blogContext";
 export async function getCategories() {
   const data = await client.fetch(`*[_type == 'category']{
  title
@@ -16,7 +16,7 @@ export async function getBlogs(date: string = "") {
   const query = `
  *[_type == 'post' ${
    date && "&& publishedAt < '" + date + "'"
- }]| order(publishedAt desc)[0...2]{
+ }]| order(publishedAt desc)[0...${paginate}]{
   title,
     _id, 
     slug,
@@ -40,8 +40,8 @@ export async function getPrevBlogs(date: string = "", page: number) {
   const query = `
  *[_type == 'post' ${
    date && "&& publishedAt >= '" + date + "'"
- }]| order(publishedAt desc)[${page * paginated}...${
-    page * paginated + paginated
+ }]| order(publishedAt desc)[${page * paginate}...${
+    page * paginate + paginate
   }]{
   title,
     _id, 
@@ -74,28 +74,8 @@ export async function getSingleBlog(slug: string) {
 export async function getBlogResults(
   search: string = "",
   category: string = "",
-  // beforeDate: string = "",
-  // afterDate: string = "",
   page: number
 ) {
-  /*
-  let query = `
- *[_type == 'post' ${
-   date && "&&  publishedAt < " + date
- }]| order(publishedAt desc) [0...5]{
-  title,
-    _id, 
-    slug,
-    "body":pt::text(body),
-    publishedAt,
-    mainImage{  
-    asset -> {
-          _id,
-          url
-        },
-        alt},
-  "categories": categories[]->title}`;
-  */
   let query = "*[_type == 'post' ";
   if (search) {
     query +=
@@ -108,15 +88,10 @@ export async function getBlogResults(
   if (category) {
     query += `&& '${category}' in categories[]->title`;
   }
-  // if (beforeDate) {
-  //   query += "&& publishedAt < " + beforeDate;
-  // }
-  // if (afterDate) {
-  //   query += "&& publishedAt > " + afterDate;
-  // }
+
   const count = await client.fetch(`count(${query}])`);
-  query += `]| order(publishedAt desc) [${page * paginated}...${
-    page * paginated + paginated
+  query += `]| order(publishedAt desc) [${page * paginate}...${
+    page * paginate + paginate
   }]{
   title,
     _id, 
