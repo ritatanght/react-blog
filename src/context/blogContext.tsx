@@ -51,7 +51,7 @@ export const BlogContextProvider = ({
       setPage(Number(sessionStorage.getItem("page")));
       setDate(lastDate[page - 1]);
     }
-  }, []);
+  }, [currentPath]);
 
   useEffect(() => {
     sessionStorage.setItem("totalPage", count.toString());
