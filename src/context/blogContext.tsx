@@ -10,7 +10,10 @@ import {
 import { useSearchParams } from "react-router-dom";
 
 const BlogContext = createContext<BlogContextType>({} as any);
-export const paginate = 3;
+
+/* number of posts per page */
+export const paginate = 2;
+
 export const BlogContextProvider = ({
   children,
 }: {
@@ -32,7 +35,11 @@ export const BlogContextProvider = ({
   const category = searchParams?.get("category") || "";
 
   const currentPath = window.location.pathname;
-
+  console.log("page", page);
+  console.log("date", date);
+  console.log("lastDate", lastDate);
+  console.log("count", count);
+  console.log("blogList", blogList);
   useEffect(() => {
     setPage(0);
     setBlogList([]);
@@ -43,6 +50,8 @@ export const BlogContextProvider = ({
 
   useEffect(() => {
     getCategories().then((result) => setCategories(result));
+  }, []);
+  useEffect(() => {
     if (currentPath === "/") {
       getCount().then((num) => setCount(Math.ceil(num / paginate)));
     }
@@ -79,6 +88,7 @@ export const BlogContextProvider = ({
         getBlogResults(search, category, page).then((result) => {
           setBlogList(result.data);
           setCount(Math.ceil(result.count / paginate));
+          setDate(result.data.slice(-1)[0].publishedAt);
           setIsLoading(false);
         });
       }

@@ -29,11 +29,7 @@ export async function getBlogs(date: string = "") {
         },
         alt},
   "categories": categories[]->title}`;
-  const data = await client.fetch(query);
-  if (!data) {
-    throw new Error("Failed to blog list");
-  }
-  return data;
+  return getData(query);
 }
 
 export async function getPrevBlogs(date: string = "", page: number) {
@@ -55,20 +51,17 @@ export async function getPrevBlogs(date: string = "", page: number) {
         },
         alt},
   "categories": categories[]->title}`;
-  const data = await client.fetch(query);
-
-  if (!data) {
-    throw new Error("Failed to blog list");
-  }
-  return data;
+  return getData(query);
 }
 
 export async function getSingleBlog(slug: string) {
-  const res = await client.fetch(`*[_type=="post" && slug.current=="${slug}"]`);
-  if (!res) {
-    throw new Error("Failed to blog details");
+  const blog = await client.fetch(
+    `*[_type=="post" && slug.current=="${slug}"]`
+  );
+  if (!blog) {
+    throw new Error("Failed to fetch blog details");
   }
-  return res[0];
+  return blog[0];
 }
 
 export async function getBlogResults(
@@ -107,7 +100,16 @@ export async function getBlogResults(
   "categories": categories[]->title}`;
   const data = await client.fetch(query);
   if (!data) {
-    throw new Error("Failed to blog list");
+    throw new Error("Failed to fetch blog list");
   }
   return { data, count };
+}
+
+async function getData(query: string) {
+  const data = await client.fetch(query);
+
+  if (!data) {
+    throw new Error("Failed to fetch blog list");
+  }
+  return data;
 }
