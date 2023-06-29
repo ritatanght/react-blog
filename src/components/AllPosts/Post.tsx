@@ -11,7 +11,7 @@ const Post = ({ post }: any) => {
   } = post;
 
   return (
-    <article className="p-4 bg-primary-900 text-white mb-4 rounded">
+    <article className="p-4 bg-primary-800 text-white mb-4 rounded">
       <Link to={`/blog/${encodeURIComponent(postSlug)}`}>
         <h2 className="text-3xl md:text-4xl">{post.title}</h2>
       </Link>

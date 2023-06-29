@@ -11,7 +11,7 @@
 
 @layer components {
   .sidebar-heading {
-    @apply bg-primary-700 absolute text-center text-xl -top-3.5 translate-x-1/2 right-1/2 uppercase font-bold w-8/12;
+    @apply bg-primary-400 absolute text-center text-xl -top-3.5 translate-x-1/2 right-1/2 uppercase font-bold w-8/12;
   }
   .sidebar-section {
     @apply border-2 rounded my-8 relative w-full px-2 py-4;

@@ -19,7 +19,7 @@ export const SearchBar = () => {
   return (
     <aside className="relative">
       {message && (
-        <div className="absolute -top-8 left-0 right-0 text-sm bg-primary-200 p-1 mb-1 rounded text-center text-primary-700">
+        <div className="absolute -top-8 left-0 right-0 text-sm bg-red p-1 mb-1 rounded text-center text-white">
           {message}
         </div>
       )}

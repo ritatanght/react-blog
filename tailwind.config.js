@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     colors: {
       white: "#ffffff",
+      red: "#B11030",
       primary: {
         100: "#f9e5e7",
         200: "#efd4d9",
@@ -12,8 +13,10 @@ module.exports = {
         500: "#BF9DA7",
         600: "#a8808b",
         700: "#7e5f67",
-        800: "#80696F",
-        900: "#403438",
+        800: "#555555",
+      },
+      secondary: {
+        100: "#3D2F5B",
       },
     },
     extend: {

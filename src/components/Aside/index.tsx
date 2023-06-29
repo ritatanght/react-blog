@@ -25,10 +25,10 @@ const Aside = () => {
       <div
         className={`max-w-xs transition ease-in-out duration-500 fixed top-16 bottom-0 right-0 z-10 ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } bg-primary-700 text-white rounded p-2 col-span-1 lg:static lg:transform-none lg:max-w-full`}
+        } bg-primary-400 text-secondary-100 rounded p-2 col-span-1 lg:static lg:transform-none lg:max-w-full`}
       >
         <button
-          className="transition ease-in-out duration-400 absolute p-1 right-full rounded-l-md flex items-center text-3xl bg-primary-600 hover:bg-primary-500 lg:hidden"
+          className="transition ease-in-out duration-400 absolute p-1 right-full rounded-l-md flex items-center text-3xl bg-primary-400 hover:bg-primary-500 lg:hidden"
           onClick={() => setOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -68,7 +68,7 @@ const Aside = () => {
             aria-label="Telegram"
             to="https://t.me/rtkitsune"
             target="_blank"
-            className="inline-block text-2xl p-1 std-transition rounded-full hover:bg-primary-200 hover:text-primary-700"
+            className="inline-block text-2xl p-1 std-transition rounded-full hover:bg-primary-700 hover:text-primary-100"
           >
             <PiTelegramLogo />
           </Link>
@@ -78,7 +78,7 @@ const Aside = () => {
         <button
           onClick={scrollToTop}
           aria-label="Move to Top"
-          className="std-transition text-4xl fixed right-5 bottom-5 text-primary-600 bg-primary-100 rounded-md hover:bg-primary-700 hover:text-primary-200"
+          className="std-transition text-4xl fixed right-5 bottom-5 text-primary-400 bg-white rounded-md hover:bg-primary-700 hover:text-primary-200"
         >
           <BsArrowUpSquareFill />
         </button>

@@ -11,7 +11,7 @@ const PageNavigation = ({ handlePageChange, page, count }: PageNaviProps) => {
     <div className="flex justify-between text-2xl">
       <button
         aria-label="Previous page"
-        className={`flex items-center text-primary-900 hover:text-primary-500 ${
+        className={`flex items-center text-primary-900 hover:text-primary-600 ${
           page === 0 ? "invisible" : ""
         }`}
         onClick={() => handlePageChange("prev")}
@@ -21,7 +21,7 @@ const PageNavigation = ({ handlePageChange, page, count }: PageNaviProps) => {
 
       <button
         aria-label="Next page"
-        className={`flex items-center text-primary-900 hover:text-primary-500 ${
+        className={`flex items-center text-primary-900 hover:text-primary-600 ${
           !count || page === count - 1 ? "invisible" : ""
         }`}
         onClick={() => handlePageChange("next")}
