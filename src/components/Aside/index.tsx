@@ -68,7 +68,7 @@ const Aside = () => {
             aria-label="Telegram"
             to="https://t.me/rtkitsune"
             target="_blank"
-            className="inline-block text-2xl p-1 std-transition rounded-full hover:bg-primary-700 hover:text-primary-100"
+            className="text-2xl p-1 std-transition rounded-full hover:bg-primary-700 hover:text-primary-100"
           >
             <PiTelegramLogo />
           </Link>

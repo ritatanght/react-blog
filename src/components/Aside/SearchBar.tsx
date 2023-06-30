@@ -10,6 +10,7 @@ export const SearchBar = () => {
     e.preventDefault();
     setMessage("");
     if (search) {
+      setSearch("");
       navigate(`/blog?search=${encodeURIComponent(search)}`);
     } else {
       setMessage("Please enter search words");

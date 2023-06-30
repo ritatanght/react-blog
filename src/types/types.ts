@@ -12,6 +12,8 @@ export interface BlogData {
 
 interface BlogMainImage {
   asset: {
+    _id: string;
+    url: string;
     _ref: string;
     _type: string;
   };

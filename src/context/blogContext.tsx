@@ -40,25 +40,34 @@ export const BlogContextProvider = ({
   console.log("lastDate", lastDate);
   console.log("count", count);
   console.log("blogList", blogList);
+
   useEffect(() => {
-    setPage(0);
-    setBlogList([]);
-    setDate("");
-    setLastDate([]);
-    setPageAction("");
+    if (sessionStorage.getItem("params")) {
+      const params = JSON.parse(sessionStorage.getItem("params") || "");
+      if (
+        (search || category) &&
+        !(params.search === search && params.category === category)
+      ) {
+        // a new query with previous query
+        resetQueryResults();
+      }
+    } else {
+      // a new query with no previous query
+      resetQueryResults();
+    }
   }, [search, category]);
 
   useEffect(() => {
     getCategories().then((result) => setCategories(result));
+    if (sessionStorage.getItem("lastDates")) {
+      setLastDate(JSON.parse(sessionStorage.getItem("lastDates") || ""));
+      setPage(Number(sessionStorage.getItem("page")));
+      setDate(lastDate[page - 1] || "");
+    }
   }, []);
   useEffect(() => {
     if (currentPath === "/") {
       getCount().then((num) => setCount(Math.ceil(num / paginate)));
-    }
-    if (sessionStorage.getItem("lastDates")) {
-      setLastDate(JSON.parse(sessionStorage.getItem("lastDates") || ""));
-      setPage(Number(sessionStorage.getItem("page")));
-      setDate(lastDate[page - 1]);
     }
   }, [currentPath]);
 
@@ -67,8 +76,9 @@ export const BlogContextProvider = ({
   }, [count]);
 
   useEffect(() => {
-    if (!window.location.pathname.startsWith("/blog/")) {
+    if (!currentPath.startsWith("/blog/")) {
       setIsLoading(true);
+      // Home page fetching
       if (!search && !category) {
         if (pageAction === "prev" || (!pageAction && lastDate.length)) {
           getPrevBlogs(date, page).then((result) => {
@@ -84,23 +94,42 @@ export const BlogContextProvider = ({
           });
         }
       } else {
-        // Query for search or category
-        getBlogResults(search, category, page).then((result) => {
-          setBlogList(result.data);
-          setCount(Math.ceil(result.count / paginate));
-          setDate(result.data.slice(-1)[0].publishedAt);
-          setIsLoading(false);
-        });
+        // Query for search or category - fetching when page != 0 or loading prev page
+        if (page || pageAction === "prev") {
+          getBlogResults(search, category, page).then((result) => {
+            setBlogList(result.data);
+            setCount(Math.ceil(result.count / paginate));
+            setDate(result.data.slice(-1)[0].publishedAt);
+            setIsLoading(false);
+          });
+        }
       }
       sessionStorage.setItem("page", page.toString());
       sessionStorage.setItem("lastDates", JSON.stringify(lastDate));
     } else {
       setPageAction("");
     }
-  }, [page, search, category, currentPath]);
+  }, [page]);
+
+  const resetQueryResults = () => {
+    setIsLoading(true);
+    setPage(0);
+    setBlogList([]);
+    setDate("");
+    setLastDate([]);
+    setPageAction("");
+    sessionStorage.setItem("params", JSON.stringify({ search, category }));
+    getBlogResults(search, category, 0).then((result) => {
+      setBlogList(result.data);
+      setCount(Math.ceil(result.count / paginate));
+      setDate(result.data.slice(-1)[0].publishedAt);
+      setIsLoading(false);
+    });
+  };
 
   const handlePageChange = (action: string) => {
     if (action === "next") {
+      if (page === count) return;
       if (lastDate.length === page) {
         setLastDate((prevLastDate) => prevLastDate.concat([date]));
       }

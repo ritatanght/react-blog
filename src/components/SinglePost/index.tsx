@@ -41,7 +41,7 @@ const SinglePost = () => {
     <>
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center border-2 p-1 mb-1 text-primary-600 rounded hover:text-secondary-100"
+        className="flex items-center border-2 p-1 mb-2 text-primary-600 rounded hover:text-secondary-100"
       >
         <TiArrowBack className="text-xl" /> Back
       </button>
