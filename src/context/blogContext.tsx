@@ -75,7 +75,7 @@ export const BlogContextProvider = ({
     if (page === 0 && count === 0) {
       getCount().then((num) => setCount(Math.ceil(num / paginate)));
     }
-    getBlogs(date).then((result) => {
+    getBlogs(page === 0 ? "" : date).then((result) => {
       setBlogList(result);
       if (result.length) {
         setDate(result.slice(-1)[0].publishedAt);

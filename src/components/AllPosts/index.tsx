@@ -44,11 +44,16 @@ const AllPosts = () => {
         }
         queryPosts();
       } else {
-        if (pageAction === "prev" || !pageAction) {
-          getPrevPosts();
-        } else {
+        if (pageAction === "next" || !page) {
           getNextPosts();
+        } else {
+          getPrevPosts();
         }
+        // if (pageAction === "prev" || (!pageAction && page)) {
+        //   getPrevPosts();
+        // } else {
+        //   getNextPosts();
+        // }
       }
       sessionStorage.setItem("page", page.toString());
     }
