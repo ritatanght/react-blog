@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 const NotFound = () => {
   return (
     <section className="text-center">
-      <h1 className="hand-font text-5xl my-8">404 Not Found</h1>
+      <h1 className="text-5xl my-8">404</h1>
+      <p className="my-8 text-3xl hand-font capitalize">
+        The page you were looking for does not exist.
+      </p>
       <Link
         to="/"
         reloadDocument

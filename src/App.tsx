@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import SinglePost from "./components/SinglePost";
-import PostList from "./components/AllPosts";
+import AllPosts from "./components/AllPosts";
 import QueryList from "./components/QueryList";
 import NotFound from "./components/NotFound";
 
@@ -10,7 +10,7 @@ function App() {
     <div className="min-h-screen flex flex-col">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route element={<PostList />} path="/" />
+          <Route element={<AllPosts />} path="/" />
           <Route path="blog" element={<QueryList />} />
           <Route path="blog/:slug" element={<SinglePost />} />
           <Route path="*" element={<NotFound />} />

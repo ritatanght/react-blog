@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 const BlogContext = createContext<BlogContextType>({} as any);
 
 /* number of posts per page */
-export const paginate = 2;
+export const paginate = 3;
 
 export const BlogContextProvider = ({
   children,
@@ -36,24 +36,12 @@ export const BlogContextProvider = ({
   const search = searchParams?.get("search") || "";
   const category = searchParams?.get("category") || "";
 
-  console.log("page", page);
-  console.log("date", date);
-  console.log("lastDate", lastDate);
-  console.log("count", count);
-  console.log("blogList", blogList);
-
   useEffect(() => {
     sessionStorage.setItem("totalPage", count.toString());
   }, [count]);
   useEffect(() => {
     sessionStorage.setItem("lastDates", JSON.stringify(lastDate));
   }, [lastDate]);
-
-  // useEffect(() => {
-  //   if (blogList.length) {
-  //     setDate(blogList.slice(-1)[0].publishedAt);
-  //   }
-  // }, [blogList]);
 
   const queryPosts = () => {
     setIsLoading(true);

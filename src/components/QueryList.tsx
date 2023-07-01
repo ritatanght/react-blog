@@ -1,8 +1,8 @@
-import { useBlogContext } from "../context/blogContext";
 import AllPosts from "./AllPosts";
+import { useSearchParams } from "react-router-dom";
 
 const QueryList = () => {
-  const { searchParams } = useBlogContext();
+  const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams?.get("search") || "";
   const category = searchParams?.get("category") || "";
 

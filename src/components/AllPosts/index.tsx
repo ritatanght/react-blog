@@ -49,11 +49,6 @@ const AllPosts = () => {
         } else {
           getPrevPosts();
         }
-        // if (pageAction === "prev" || (!pageAction && page)) {
-        //   getPrevPosts();
-        // } else {
-        //   getNextPosts();
-        // }
       }
       sessionStorage.setItem("page", page.toString());
     }
