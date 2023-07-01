@@ -44,7 +44,7 @@ const AllPosts = () => {
         }
         queryPosts();
       } else {
-        if (pageAction === "prev" || (!pageAction && page)) {
+        if (pageAction === "prev" || !pageAction) {
           getPrevPosts();
         } else {
           getNextPosts();
