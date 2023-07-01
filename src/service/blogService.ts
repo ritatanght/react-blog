@@ -1,5 +1,5 @@
 import client from "../sanity/client";
-import { paginate } from "../context/blogContext-orig";
+import { paginate } from "../context/blogContext";
 export async function getCategories() {
   const data = await client.fetch(`*[_type == 'category']{
  title
