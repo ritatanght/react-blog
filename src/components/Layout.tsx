@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main className="w-11/12 mx-auto py-4 max-w-screen-5xl lg:w-10/12">
+      <main className="w-11/12 mx-auto py-4 max-w-screen-xl">
         <section className="lg:grid grid-cols-4 gap-4 items-start">
           <div className="col-span-3">
             <Outlet />

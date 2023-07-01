@@ -1,5 +1,5 @@
 import client from "../sanity/client";
-import { paginate } from "../context/blogContext";
+import { paginate } from "../context/blogContext-orig";
 export async function getCategories() {
   const data = await client.fetch(`*[_type == 'category']{
  title
@@ -34,9 +34,9 @@ export async function getBlogs(date: string = "") {
 
 export async function getPrevBlogs(date: string = "", page: number) {
   const query = `
- *[_type == 'post' ${
-   date && "&& publishedAt >= '" + date + "'"
- }]| order(publishedAt desc)[${page * paginate}...${
+  *[_type == 'post' ${
+    date && "&& publishedAt >= '" + date + "'"
+  }]| order(publishedAt desc)[${page * paginate}...${
     page * paginate + paginate
   }]{
   title,
@@ -51,6 +51,7 @@ export async function getPrevBlogs(date: string = "", page: number) {
         },
         alt},
   "categories": categories[]->title}`;
+
   return getData(query);
 }
 
@@ -81,8 +82,10 @@ export async function getBlogResults(
   if (category) {
     query += `&& '${category}' in categories[]->title`;
   }
-
-  const count = await client.fetch(`count(${query}])`);
+  let count = null;
+  if (page === 0) {
+    count = await client.fetch(`count(${query}])`);
+  }
   query += `]| order(publishedAt desc) [${page * paginate}...${
     page * paginate + paginate
   }]{

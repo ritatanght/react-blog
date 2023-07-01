@@ -1,13 +1,22 @@
 import { Slug, PortableTextBlock } from "sanity";
 
-export interface BlogData {
+interface BlogBase {
   _id: string;
   title: string;
   categories: string[];
   slug: Slug;
   publishedAt: string;
   mainImage: BlogMainImage;
+}
+
+export interface BlogData extends BlogBase {
+  type: "blogContent";
   body: PortableTextBlock[];
+}
+
+export interface BlogDataPreview extends BlogBase {
+  type: "blogPreview";
+  body: string;
 }
 
 interface BlogMainImage {
@@ -22,12 +31,16 @@ interface BlogMainImage {
 }
 
 export interface BlogContextType {
-  categories: string[];
   blogList: BlogData[];
   page: number;
   date: string;
   count: number;
-  searchParams: URLSearchParams;
+  pageAction: string;
   isLoading: boolean;
+  searchParams: URLSearchParams;
   handlePageChange: (arg0: string) => void;
+  getPrevPosts: () => void;
+  getNextPosts: () => void;
+  queryPosts: () => void;
+  resetQueryResults: () => void;
 }

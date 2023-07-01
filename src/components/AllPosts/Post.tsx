@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { urlForImage } from "../../sanity/image";
+import { BlogDataPreview } from "../../types/types";
 
-const Post = ({ post }: any) => {
+interface PostProps {
+  post: BlogDataPreview;
+}
+
+const Post: React.FunctionComponent<PostProps> = ({ post }) => {
   const {
     mainImage,
     body,
@@ -19,7 +24,7 @@ const Post = ({ post }: any) => {
         <img
           src={urlForImage(mainImage).url()}
           alt={mainImage.alt}
-          className="text-center py-4 px-10 mx-auto"
+          className="text-center py-4 px-10 mx-auto md:max-w-2xl"
         />
       )}
       <p className="inline-block">

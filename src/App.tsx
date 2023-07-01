@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import SinglePost from "./components/SinglePost";
 import PostList from "./components/AllPosts";
 import QueryList from "./components/QueryList";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route element={<PostList />} path="/" />
           <Route path="blog" element={<QueryList />} />
           <Route path="blog/:slug" element={<SinglePost />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </div>

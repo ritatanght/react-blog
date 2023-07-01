@@ -4,19 +4,29 @@ import { PiTelegramLogo } from "react-icons/pi";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { BsArrowUpSquareFill } from "react-icons/bs";
-import { useBlogContext } from "../../context/blogContext";
+import { getCategories } from "../../service/blogService";
 
 const Aside = () => {
   const [isOpen, setOpen] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const { categories } = useBlogContext();
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     const scrollButtonVisibility = () =>
       window.scrollY > 300 ? setShowButton(true) : setShowButton(false);
     window.addEventListener("scroll", scrollButtonVisibility);
     return () => window.removeEventListener("scroll", scrollButtonVisibility);
   }, []);
-
+  useEffect(() => {
+    if (sessionStorage.getItem("categories")) {
+      setCategories(JSON.parse(sessionStorage.getItem("categories") || ""));
+    } else {
+      getCategories().then((result) => {
+        sessionStorage.setItem("categories", JSON.stringify(result));
+        setCategories(result);
+      });
+    }
+  }, []);
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -25,7 +35,7 @@ const Aside = () => {
       <div
         className={`max-w-xs transition ease-in-out duration-500 fixed top-16 bottom-0 right-0 z-10 ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } bg-primary-400 text-secondary-100 rounded p-2 col-span-1 lg:static lg:transform-none lg:max-w-full`}
+        } bg-primary-400 text-secondary-100 rounded py-2 px-4 col-span-1 lg:static lg:transform-none lg:max-w-full`}
       >
         <button
           className="transition ease-in-out duration-400 absolute p-1 right-full rounded-l-md flex items-center text-3xl bg-primary-400 hover:bg-primary-500 lg:hidden"
