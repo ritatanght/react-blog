@@ -35,7 +35,7 @@ export const BlogContextProvider = ({
 
   const search = searchParams?.get("search") || "";
   const category = searchParams?.get("category") || "";
-
+  
   useEffect(() => {
     sessionStorage.setItem("totalPage", count.toString());
   }, [count]);

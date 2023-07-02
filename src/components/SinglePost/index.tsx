@@ -7,6 +7,7 @@ import { getSingleBlog } from "../../service/blogService";
 import { urlForImage } from "../../sanity/image";
 import { TiArrowBack } from "react-icons/ti";
 import { BlogData } from "../../types/types";
+import RelatedPosts from "./RelatedPosts";
 
 const SinglePost = () => {
   const [blog, setBlog] = useState<BlogData | null>(null);
@@ -21,6 +22,7 @@ const SinglePost = () => {
         .then((result) => {
           setBlog(result);
           setIsLoading(false);
+          document.title = "Knots of Life: " + result.title;
         })
         .catch((error) => {
           console.log(error);
@@ -30,12 +32,12 @@ const SinglePost = () => {
   }, [slug]);
 
   if (isLoading) return <Loader />;
-  if (!blog)
+  if (!blog || !slug)
     return (
       <h1 className="text-center text-4xl hand-font my-4">Post Not found</h1>
     );
 
-  const { title, mainImage, body, publishedAt } = blog;
+  const { title, mainImage, body, publishedAt, categories } = blog;
 
   return (
     <>
@@ -46,7 +48,7 @@ const SinglePost = () => {
         <TiArrowBack className="text-xl" /> Back
       </button>
       <article className="w-full md:w-11/12 bg-primary-700 rounded text-white p-4 mx-auto">
-        <h1 className="text-4xl mb-2">{title}</h1>
+        <h2 className="text-4xl mb-2">{title}</h2>
         {mainImage && (
           <img src={urlForImage(mainImage).url()} alt={mainImage.alt} />
         )}
@@ -62,6 +64,7 @@ const SinglePost = () => {
           })}
         </span>
       </article>
+      <RelatedPosts categories={categories} slug={slug} />
     </>
   );
 };

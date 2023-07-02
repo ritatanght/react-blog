@@ -57,7 +57,20 @@ export async function getPrevBlogs(date: string = "", page: number) {
 
 export async function getSingleBlog(slug: string) {
   const blog = await client.fetch(
-    `*[_type=="post" && slug.current=="${slug}"]`
+    `*[_type=="post" && slug.current=="${slug}"]{
+      _id, 
+    slug,
+    title,
+    body,
+    publishedAt,
+    mainImage{  
+    asset -> {
+          _id,
+          url
+        },
+        alt},
+  "categories": categories[]->title
+    }`
   );
   if (!blog) {
     throw new Error("Failed to fetch blog details");
@@ -106,6 +119,31 @@ export async function getBlogResults(
     throw new Error("Failed to fetch blog list");
   }
   return { data, count };
+}
+export async function getRelatedBlogs(categories: string[], slug: string) {
+  let blogList = [];
+  for (const category of categories) {
+    if (blogList.length < 5) {
+      let query = `*[_type == 'post' && '${category}' in categories[]->title && slug.current != '${slug}'][0...5]{
+        title,
+      _id, 
+      slug, 
+      mainImage{  
+      asset -> {
+            _id,
+            url
+          },
+          alt},
+   }`;
+
+      blogList.push(...(await getData(query)));
+    }
+  }
+  if (blogList.length > 5) {
+    blogList = blogList.slice(0, 5);
+  }
+
+  return blogList;
 }
 
 async function getData(query: string) {
